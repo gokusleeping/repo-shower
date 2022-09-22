@@ -1,0 +1,50 @@
+.container {
+  padding: 2rem;
+}
+
+.profile {
+  flex: column;
+
+  &__details {
+    display: flex;
+    align-items: cente r;
+
+    &__avatar {
+      flex-grow: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        border-radius: 1000px;
+        object-fit: cover;
+      }
+    }
+
+    &__about {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      flex-grow: 5;
+
+      .name {
+        font-size: 1.5rem;
+      }
+
+      .description {
+        font-size: 0.8rem;
+      }
+
+      .location {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+.repos {
+  gap: 1.25rem;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+}
