@@ -4,7 +4,6 @@
 
 .profile {
   flex: column;
-
   &__details {
     display: flex;
     align-items: cente r;
@@ -14,6 +13,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 40px;
 
       img {
         border-radius: 1000px;
@@ -29,6 +29,7 @@
 
       .name {
         font-size: 1.5rem;
+        font-family: 'Courier New', monospace;
       }
 
       .description {
