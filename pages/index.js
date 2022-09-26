@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Paginate from './components/Pagination'
 import Home from './[username]'
 function Forminput() {
   const [fname, setFname] = useState('')
@@ -15,6 +16,7 @@ function Forminput() {
         </label>
       </form>
       <Home />
+      <Paginate />
     </div>
   )
 }
