@@ -12,7 +12,7 @@ function Forminput() {
   }
 
   return (
-    <div className="input">
+    <div className="input1">
       <form onSubmit={submitForm}>
         <label className="label1">
           Input username: <input type="text" value={username} onChange={handleChange} />

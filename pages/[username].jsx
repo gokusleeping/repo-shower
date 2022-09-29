@@ -1,42 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import Card from './components/Card'
 import Pagination from './components/Pagination'
 
 const reposPerPage = 9
 
-export default function Home() {
-  const { query } = useRouter()
+export default function Home({ userDetails }) {
   const [repos, setRepos] = useState([])
-  const [userDetails, setUserDetails] = useState({})
   const [pageNumber, setPageNumber] = useState(1)
-
-  const apiUrl = `https://api.github.com/users/${query.username}`
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(apiUrl)
-        const data = await response.json()
-        setUserDetails({
-          name: data.name,
-          bio: data.bio,
-          username: data.login,
-          location: data.location,
-          twitter: data.twitter_username,
-          avatar: data.avatar_url,
-          repos_url: data.repos_url,
-          repo_count: data.public_repos,
-        })
-      } catch (e) {
-        console.error('fetchData', e)
-      }
-    }
-
-    if (query.username) fetchData()
-  }, [query])
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -74,7 +46,7 @@ export default function Home() {
               <h1 className="name">{userDetails?.name || userDetails?.username}</h1>
               <h2 className="decription">{userDetails?.bio}</h2>
               <h3 className="location">
-                <img src="" />
+                <Image src="" alt="" />
                 {userDetails?.lLocation}
               </h3>
             </div>
@@ -101,4 +73,26 @@ export default function Home() {
       </div>
     </>
   )
+}
+
+export async function getServerSideProps({ params }) {
+  let userDetails = {}
+  try {
+    const apiUrl = `https://api.github.com/users/${params.username}`
+    const response = await fetch(apiUrl)
+    const data = await response.json()
+    userDetails = {
+      name: data.name,
+      bio: data.bio,
+      username: data.login,
+      location: data.location,
+      twitter: data.twitter_username,
+      avatar: data.avatar_url,
+      repos_url: data.repos_url,
+      repo_count: data.public_repos,
+    }
+  } catch (e) {
+    console.error('fetchData', e)
+  }
+  return { props: { userDetails } }
 }

@@ -24,3 +24,7 @@ function Paginate({ page, repoCount, reposPerPage, setPageNumber }) {
 }
 
 export default Paginate
+
+export async function getServerSideProps(ctx) {
+  return { props: { ...ctx.props } }
+}
